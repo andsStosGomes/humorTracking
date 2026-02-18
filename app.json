@@ -2,6 +2,15 @@
   "expo": {
     "name": "humorTracking",
     "slug": "humorTracking",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "android": {
+      "package": "com.anonymous.humorTracking"
+    },
+    "ios": {
+      "bundleIdentifier": "com.anonymous.humorTracking"
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

@@ -1,4 +1,4 @@
-package com.humortracking
+package com.anonymous.humorTracking
 
 import android.app.Application
 import android.content.res.Configuration
