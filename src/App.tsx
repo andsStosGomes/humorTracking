@@ -17,7 +17,7 @@ export default function App() {
   const [loaded] = useFonts({
     regular: Inter_400Regular,
     regularItalic: Inter_400Regular_Italic,
-    extraBold: Inter_800ExtraBold
+    extrabold: Inter_800ExtraBold
   }); 
 
 

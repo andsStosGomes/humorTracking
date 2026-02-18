@@ -7,6 +7,7 @@ import SetUserNamePage from './screen/SetUserName';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { theme } from './shared/themes/Theme';
 
 
 
@@ -23,14 +24,25 @@ export default function AppRoutes() {
     <>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="home" 
-           screenLayout={({ children }) => (
-             <SafeAreaView style={{ flex: 1 }}>
-               {children}
-             </SafeAreaView>)}>
+          initialRouteName="home"
+          screenLayout={({ children }) => (
+            <SafeAreaView style={{ flex: 1 }}>
+              {children}
+            </SafeAreaView>)}
+          screenOptions={{
+            headerShown : false, 
+            contentStyle : {
+              backgroundColor : theme.colors.background
+            }
+          }}
+          >
           <Stack.Screen name="home" component={HomePage} />
-          <Stack.Screen name="details" component={DetailPage} />
-          <Stack.Screen name="setUserName" component={SetUserNamePage} />
+          <Stack.Group screenOptions={{ 
+            sheetCornerRadius: 24, 
+            presentation: 'formSheet' }}>
+            <Stack.Screen name="details" component={DetailPage} />
+            <Stack.Screen name="setUserName" component={SetUserNamePage} />
+          </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
     </>
