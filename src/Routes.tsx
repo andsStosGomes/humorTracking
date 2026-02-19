@@ -17,6 +17,12 @@ type TScreenDefinitions = {
   details: { rate: number };
 }
 
+
+export type TabNavigationScreenProp = {
+  navigate: <T extends keyof TScreenDefinitions>(screen: T, params: TScreenDefinitions[T]) => void;
+  goBack: () => void;
+}
+
 const Stack = createNativeStackNavigator<TScreenDefinitions>();
 
 export default function AppRoutes() {
@@ -26,7 +32,7 @@ export default function AppRoutes() {
         <Stack.Navigator
           initialRouteName="home"
           screenLayout={({ children }) => (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1 }} edges={['top', 'left', 'right']} >
               {children}
             </SafeAreaView>)}
           screenOptions={{
@@ -37,11 +43,20 @@ export default function AppRoutes() {
           }}
           >
           <Stack.Screen name="home" component={HomePage} />
+
           <Stack.Group screenOptions={{ 
             sheetCornerRadius: 24, 
             presentation: 'formSheet' }}>
-            <Stack.Screen name="details" component={DetailPage} />
-            <Stack.Screen name="setUserName" component={SetUserNamePage} />
+            <Stack.Screen 
+              name="details" 
+              component={DetailPage} 
+              options={{ sheetAllowedDetents: [0.8, 0.95] }}
+            />
+            <Stack.Screen 
+              name="setUserName" 
+              component={SetUserNamePage} 
+              options={{ sheetAllowedDetents: [0.4, 0.6] }}
+            />
           </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
