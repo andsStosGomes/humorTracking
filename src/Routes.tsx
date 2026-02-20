@@ -32,29 +32,51 @@ export default function AppRoutes() {
         <Stack.Navigator
           initialRouteName="home"
           screenLayout={({ children }) => (
-            <SafeAreaView style={{ flex: 1 }} edges={['top', 'left', 'right']} >
+            <SafeAreaView
+              style={{ flex: 1 }}
+              edges={['top', 'left', 'right']} >
               {children}
             </SafeAreaView>)}
           screenOptions={{
-            headerShown : false, 
-            contentStyle : {
-              backgroundColor : theme.colors.background
+            headerShown: false,
+            contentStyle: {
+              backgroundColor: theme.colors.background
             }
           }}
-          >
+        >
           <Stack.Screen name="home" component={HomePage} />
 
-          <Stack.Group screenOptions={{ 
-            sheetCornerRadius: 24, 
-            presentation: 'formSheet' }}>
-            <Stack.Screen 
-              name="details" 
-              component={DetailPage} 
+          <Stack.Group
+            screenOptions={{
+              sheetCornerRadius: 24,
+              presentation: 'formSheet',
+              contentStyle: {
+                height: '100%',
+              }
+            }}
+            screenLayout={
+              ({ children }) => (
+                <SafeAreaView
+                  style={{
+                    flex: 1,
+                    padding: 16,
+                    backgroundColor: theme.colors.paper
+                  }}
+                  edges={['left', 'right']}
+                >
+                  {children}
+                </SafeAreaView>
+              )
+            }
+          >
+            <Stack.Screen
+              name="details"
+              component={DetailPage}
               options={{ sheetAllowedDetents: [0.8, 0.95] }}
             />
-            <Stack.Screen 
-              name="setUserName" 
-              component={SetUserNamePage} 
+            <Stack.Screen
+              name="setUserName"
+              component={SetUserNamePage}
               options={{ sheetAllowedDetents: [0.4, 0.6] }}
             />
           </Stack.Group>

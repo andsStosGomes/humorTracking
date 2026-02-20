@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 
 import { Footer } from '@/shared/components/Footer';
 import { Header } from '@/shared/components/Header';
@@ -9,6 +9,7 @@ import { BaseInput } from '@/shared/components/BaseInput';
 import { useNavigation } from '@react-navigation/native';
 import { TabNavigationScreenProp } from '@/Routes';
 
+import { styles } from './style';
 
 
 export default function HomePage() {
@@ -17,15 +18,28 @@ export default function HomePage() {
   const [name, setName] = React.useState<string>('');
   return (
     <>
-      <Header name={name} />  
-      <Text style={{ fontFamily:theme.fonts.family.bold, fontSize: theme.fonts.size.large, textAlign: 'center' }}>Home</Text>
+      <Header name={name} />
+
+      <Text style={{ fontFamily: theme.fonts.family.bold, fontSize: theme.fonts.size.large, textAlign: 'center' }}>Home</Text>
+
       <View style={{ flex: 1 }} />
+
       <Footer>
-        <BaseInput label='Nome' asBotton onPress={() => navigation.navigate('setUserName', undefined)}>
-          <Text style={{ fontFamily: theme.fonts.family.regular, fontSize: theme.fonts.size.small, marginBottom: 8 }}>Digite seu nome</Text>
-        </BaseInput>
+        <View style={styles.footerContainer}>
+          <Text style={styles.footerTitle}>Qual o seu nome?</Text>
+
+          <BaseInput label='Nome' asBotton onPress={() => navigation.navigate('setUserName', undefined)}>
+            <TextInput
+              pointerEvents='none'
+              editable={false}
+              placeholder=' Escreva seu nome aqui'
+              placeholderTextColor={theme.colors.textPlaceholder}
+              style={styles.footerInput}
+            />
+          </BaseInput>
+        </View>
       </Footer>
-      
+
     </>
   );
 }
