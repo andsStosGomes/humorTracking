@@ -6,26 +6,34 @@ import { Footer } from '@/shared/components/Footer';
 import { Header } from '@/shared/components/Header';
 import { theme } from '@/shared/themes/Theme';
 import { BaseInput } from '@/shared/components/BaseInput';
-import { useNavigation } from '@react-navigation/native';
-import { TabNavigationScreenProp } from '@/Routes';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { TNavigationScreenProps, TRouteProps} from '@/Routes';
 
 import { styles } from './style';
 
 
 export default function HomePage() {
-  const navigation = useNavigation<TabNavigationScreenProp>();
+  const navigation = useNavigation<TNavigationScreenProps>();
+  const { params } = useRoute<TRouteProps<'home'>>();
 
-  const [name, setName] = React.useState<string>('');
+  const [userName, setUserName] = React.useState<string>('');
+
+  React.useEffect(() => {
+    if (params?.newName) {
+      setUserName(params.newName);
+    }
+  }, [params?.newName]);
+
   return (
     <>
-      <Header name={name} />
+      <Header name={userName} />
 
       <Text style={{ fontFamily: theme.fonts.family.bold, fontSize: theme.fonts.size.large, textAlign: 'center' }}>Home</Text>
 
       <View style={{ flex: 1 }} />
 
       <Footer>
-        <View style={styles.footerContainer}>
+        <View style={styles.homeFooterContainer}>
           <Text style={styles.footerTitle}>Qual o seu nome?</Text>
 
           <BaseInput label='Nome' asBotton onPress={() => navigation.navigate('setUserName', undefined)}>

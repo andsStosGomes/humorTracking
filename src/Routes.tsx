@@ -1,27 +1,22 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, RouteProp  } from '@react-navigation/native';
 
 import HomePage from './screen/Home';
 import DetailPage from './screen/Detail';
 import SetUserNamePage from './screen/SetUserName';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from './shared/themes/Theme';
 
 
 
 type TScreenDefinitions = {
-  home: undefined;
+  home: { newName: string } | undefined;
   setUserName: undefined;
   details: { rate: number };
 }
 
-
-export type TabNavigationScreenProp = {
-  navigate: <T extends keyof TScreenDefinitions>(screen: T, params: TScreenDefinitions[T]) => void;
-  goBack: () => void;
-}
 
 const Stack = createNativeStackNavigator<TScreenDefinitions>();
 
@@ -85,3 +80,9 @@ export default function AppRoutes() {
     </>
   );
 }
+
+
+
+export type TNavigationScreenProps = NativeStackNavigationProp<TScreenDefinitions>;
+
+export type TRouteProps<T extends keyof TScreenDefinitions> = RouteProp <TScreenDefinitions, T>

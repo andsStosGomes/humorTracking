@@ -2,7 +2,11 @@ import { theme } from '@/shared/themes/Theme';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    footerContainer : {
+    container : { 
+        flex: 1,       
+        gap: 12,
+    },
+    homeFooterContainer :{
         gap: 12,
     },
     footerTitle : {
