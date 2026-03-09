@@ -10,14 +10,27 @@ import { Button } from '@/shared/components/Button';
 
 import { styles } from './style';
 import { TNavigationScreenProps } from '@/Routes';
+import { STORAGE_KEY } from '@/shared/Service/Store';
+import { useStoredValue } from '@/shared/hooks/useStoredValue';
 
 
 export default function SetUserNamePage() {
   const navigation = useNavigation<TNavigationScreenProps>();
   const insets = useSafeAreaInsets();
 
+  const { value: name, setValue: setName, saveValue } = useStoredValue<string>(
+    STORAGE_KEY.USER_NAME,
+    ''
+  );
 
-  const [name, setName] = React.useState<string>('');
+  const handleSaveUserName = async () => {
+    try {
+      await saveValue(name);
+      navigation.popTo('home', { newName: name });
+    } catch (error) {
+      console.error('Error saving user name:', error);
+    }
+  };
 
   return (
     <View style={{ ...styles.container, paddingBottom: insets.bottom }}>
@@ -38,7 +51,7 @@ export default function SetUserNamePage() {
 
       <Button
         title="Salvar"
-        onPress={() => navigation.popTo('home', { newName: name })}
+        onPress={handleSaveUserName}
       />
     </View>
   );

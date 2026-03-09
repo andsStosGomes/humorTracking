@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         justifyContent : 'center',
         alignItems : 'center',
         padding: 16,
-        gap : 6, 
+        gap : 4, 
     }, 
     headerText : {
         fontFamily: theme.fonts.family.regular,
